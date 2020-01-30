@@ -1,0 +1,24 @@
+name: rust stable build
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 9 * * 1'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: clux/muslrust:stable
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: |
+        HOME=/root cargo +stable build --target x86_64-unknown-linux-musl --release
+        mv target/x86_64-unknown-linux-musl/release/snore $GITHUB_WORKSPACE
+    - name: Upload statically linked binary
+      uses: actions/upload-artifact@v1
+      with:
+        name: snore
+        path: snore

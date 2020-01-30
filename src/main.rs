@@ -47,7 +47,7 @@ fn main() {
     let matches = App::new("snore")
         .version(env!("CARGO_PKG_VERSION"))
         .author(env!("CARGO_PKG_AUTHORS"))
-        .about("\nRuns for the given time and is similar to the Unix `sleep` command.")
+        .about(format!("\n{}.", env!("CARGO_PKG_DESCRIPTION")).as_str())
         .after_help(format!(
             "{examples}
     Run {snore} for one second:
@@ -60,7 +60,7 @@ fn main() {
         snore 1h 20m
 
     Run {snore} for 2 seconds and 500 milliseconds:
-        snore 2s 500ms
+        snore 500ms 2s
 
     Run {snore} for one and a half seconds:
         snore 1.5s

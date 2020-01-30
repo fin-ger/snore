@@ -2,7 +2,9 @@
 name = "snore"
 version = "0.1.0"
 authors = ["Fin Christensen <christensen.fin@gmail.com>"]
+description = "Runs for the given time and is similar to the Unix `sleep` command"
 edition = "2018"
+license = "GPL-3.0-or-later"
 
 [dependencies]
 clap = "2.33.0"
@@ -13,3 +15,9 @@ opt-level = 'z'  # Optimize for size.
 lto = true
 codegen-units = 1
 panic = 'abort'
+
+[package.metadata.rpm.cargo]
+buildflags = ["--release"]
+
+[package.metadata.rpm.targets]
+snore = { path = "/usr/bin/snore" }
