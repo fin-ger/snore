@@ -3,9 +3,9 @@ name: rust stable build
 on:
   push:
     branches:
-      - master
+    - master
   schedule:
-    - cron: '0 9 1 * *'
+  - cron: '0 9 1 * *'
 
 jobs:
   build:

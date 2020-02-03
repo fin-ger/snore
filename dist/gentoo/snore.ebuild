@@ -25,12 +25,12 @@ winapi-x86_64-pc-windows-gnu-0.4.0
 
 inherit cargo
 
-DESCRIPTION="Runs for the given time and is similar to the Unix `sleep` command"
+DESCRIPTION="Runs for the given time and is similar to the Unix 'sleep' command"
 HOMEPAGE="https://github.com/fin-ger/snore"
-SRC_URI="https://github.com/fin-ger/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz
+SRC_URI="https://github.com/fin-ger/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 		 $(cargo_crate_uris ${CRATES})"
 RESTRICT="mirror"
-LICENSE="Apache-2.0 GPL-3.0-or-later MIT"
+LICENSE="Apache-2.0 GPL-3+ MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""

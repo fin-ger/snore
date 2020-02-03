@@ -1,7 +1,9 @@
 on:
   push:
-    tags:
-    - 'v*'
+    #tags:
+    #- 'v*'
+    branches:
+    - master
 
 name: release
 
@@ -27,6 +29,35 @@ jobs:
       with:
         name: release_url
         path: release_url
+  pkg-gentoo:
+    name: Create Gentoo Ebuild
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Release Ebuild
+      run: |
+        VERSION="${github_ref:1}"
+        echo "::set-env name=version::$VERSION"
+        cp dist/gentoo/snore.ebuild $GITHUB_WORKSPACE/snore-$VERSION.ebuild
+    - name: Load Release URL File from release job
+      uses: actions/download-artifact@v1
+      with:
+        name: release_url
+    - name: Get Release File Name & Upload URL
+      id: get_release_info
+      run: |
+        value=`cat release_url/release_url`
+        echo ::set-output name=upload_url::$value
+    - name: Upload Linux AMD64 Release Assets
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+        asset_path: snore-${{ version }}.ebuild
+        asset_name: snore-${{ version }}.ebuild
+        asset_content_type: text/plain
   build-linux-amd64:
     name: Release Linux AMD64
     runs-on: ubuntu-latest
