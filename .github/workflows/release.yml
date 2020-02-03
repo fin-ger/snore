@@ -1,9 +1,9 @@
 on:
   push:
-    #tags:
-    #- 'v*'
-    branches:
-    - master
+    tags:
+    - 'v*'
+    #branches:
+    #- master
 
 name: release
 

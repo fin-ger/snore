@@ -70,7 +70,7 @@ $ snore
   <img src="https://img.shields.io/badge/download-macos-blue?style=for-the-badge&logo=apple" alt="Download MacOS Binary">
 </a>
 
-Download the `snore` binary and rename it to `snore`:
+Download the `snore-macos` binary and rename it to `snore`:
 
 ```shell
 $ mv snore-macos snore
@@ -119,7 +119,7 @@ C:\> \path\to\snore.exe
   <img src="https://img.shields.io/badge/download-linux%20armhf-blue?style=for-the-badge&logo=linux" alt="Download Linux ARMhf">
 </a>
 
-Download the `snore` binary suitable for your CPU architecture. If unsure, use **amd64**. After downloading, rename the executable to `snore`:
+Download the `snore-linux` binary suitable for your CPU architecture. If unsure, use **amd64**. After downloading, rename the executable to `snore`:
 
 ```shell
 $ mv snore-linux-amd64 snore
