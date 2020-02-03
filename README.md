@@ -28,7 +28,7 @@ This program is meant to explore cross-platform distribution over many operating
 ### Install on Gentoo GNU/Linux
 
 <a href="https://github.com/fin-ger/snore/releases/latest/download/snore-0.1.0.ebuild">
-  <img src="https://img.shields.io/badge/download-gentoo--ebuild-%2354487A?style=for-the-badge&logo=gentoo" alt="Download Gentoo Ebuild">
+  <img src="https://img.shields.io/badge/download-gentoo%20ebuild-%2354487A?style=for-the-badge&logo=gentoo" alt="Download Gentoo Ebuild">
 </a>
 
 > The ebuild is currently not included in the Gentoo packages. For now you have to use a [local overlay](https://wiki.gentoo.org/wiki/Handbook:AMD64/Portage/CustomTree#Defining_a_custom_repository) to install `snore`.
