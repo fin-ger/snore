@@ -35,9 +35,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Release Ebuild
+      id: ebuild
       run: |
         VERSION="${github_ref:1}"
-        echo "::set-env name=version::$VERSION"
+        echo "::set-output name=version::$VERSION"
         cp dist/gentoo/snore.ebuild $GITHUB_WORKSPACE/snore-$VERSION.ebuild
     - name: Load Release URL File from release job
       uses: actions/download-artifact@v1
@@ -55,8 +56,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.get_release_info.outputs.upload_url }}
-        asset_path: snore-${{ version }}.ebuild
-        asset_name: snore-${{ version }}.ebuild
+        asset_path: snore-${{ steps.ebuild.outputs.version }}.ebuild
+        asset_name: snore-${{ steps.ebuild.outputs.version }}.ebuild
         asset_content_type: text/plain
   build-linux-amd64:
     name: Release Linux AMD64
