@@ -1,6 +1,6 @@
 [package]
 name = "snore"
-version = "0.1.0"
+version = "0.1.1-alpha.0"
 authors = ["Fin Christensen <christensen.fin@gmail.com>"]
 description = "Runs for the given time and is similar to the Unix `sleep` command"
 homepage = "https://github.com/fin-ger/snore"
