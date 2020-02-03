@@ -3,6 +3,8 @@ name = "snore"
 version = "0.1.0"
 authors = ["Fin Christensen <christensen.fin@gmail.com>"]
 description = "Runs for the given time and is similar to the Unix `sleep` command"
+homepage = "https://github.com/fin-ger/snore"
+repository = "https://github.com/fin-ger/snore"
 edition = "2018"
 license = "GPL-3.0-or-later"
 
