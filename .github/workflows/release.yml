@@ -8,16 +8,10 @@ on:
 name: release
 
 jobs:
-  build:
-    name: Release
+  release:
+    name: Create Release
     runs-on: ubuntu-latest
-    container: clux/muslrust:stable
     steps:
-    - uses: actions/checkout@v1
-    - name: Build
-      run: |
-        HOME=/root cargo +stable build --target x86_64-unknown-linux-musl --release
-        mv target/x86_64-unknown-linux-musl/release/snore $GITHUB_WORKSPACE
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1.0.0
@@ -28,13 +22,216 @@ jobs:
         release_name: Release ${{ github.ref }}
         draft: false
         prerelease: false
-    - name: Upload Release Asset
+    - name: Output Release URL File
+      run: echo "${{ steps.create_release.outputs.upload_url }}" > release_url
+    - name: Save Release URL File for publish
+      uses: actions/upload-artifact@v1
+      with:
+        name: release_url
+        path: release_url
+  build-linux-amd64:
+    name: Release Linux AMD64
+    runs-on: ubuntu-latest
+    container: clux/muslrust:stable
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build Linux AMD64
+      run: |
+        HOME=/root cargo build --target x86_64-unknown-linux-musl --release
+        mv target/x86_64-unknown-linux-musl/release/snore $GITHUB_WORKSPACE/snore-linux-amd64
+    - name: Load Release URL File from release job
+      uses: actions/download-artifact@v1
+      with:
+        name: release_url
+    - name: Get Release File Name & Upload URL
+      id: get_release_info
+      run: |
+        value=`cat release_url/release_url`
+        echo ::set-output name=upload_url::$value
+    - name: Upload Linux AMD64 Release Assets
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1.0.1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: snore
-        asset_name: snore
+        upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+        asset_path: snore-linux-amd64
+        asset_name: snore-linux-amd64
+        asset_content_type: application/octet-stream
+  build-linux-arm:
+    name: Release Linux ARM
+    runs-on: ubuntu-latest
+    container: clux/muslrust:stable
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build Linux ARM
+      run: |
+        export HOME=/root
+        apt-get update && apt-get install -y gcc-arm-linux-gnueabi
+        rustup target add arm-unknown-linux-musleabi
+        mkdir -p ~/.cargo
+        cat >> ~/.cargo/config <<EOF
+        [target.arm-unknown-linux-musleabi]
+        linker = "arm-linux-gnueabi-gcc"
+        EOF
+
+        cargo build --target arm-unknown-linux-musleabi --release
+        mv target/arm-unknown-linux-musleabi/release/snore $GITHUB_WORKSPACE/snore-linux-arm
+    - name: Load Release URL File from release job
+      uses: actions/download-artifact@v1
+      with:
+        name: release_url
+    - name: Get Release File Name & Upload URL
+      id: get_release_info
+      run: |
+        value=`cat release_url/release_url`
+        echo ::set-output name=upload_url::$value
+    - name: Upload Linux ARM Release Assets
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+        asset_path: snore-linux-arm
+        asset_name: snore-linux-arm
+        asset_content_type: application/octet-stream
+  build-linux-armhf:
+    name: Release Linux ARMhf
+    runs-on: ubuntu-latest
+    container: clux/muslrust:stable
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build Linux ARMhf
+      run: |
+        export HOME=/root
+        apt-get update && apt-get install -y gcc-arm-linux-gnueabihf
+        rustup target add arm-unknown-linux-musleabihf
+        mkdir -p ~/.cargo
+        cat >> ~/.cargo/config <<EOF
+        [target.arm-unknown-linux-musleabihf]
+        linker = "arm-linux-gnueabihf-gcc"
+        EOF
+
+        cargo build --target arm-unknown-linux-musleabihf --release
+        mv target/arm-unknown-linux-musleabihf/release/snore $GITHUB_WORKSPACE/snore-linux-armhf
+    - name: Load Release URL File from release job
+      uses: actions/download-artifact@v1
+      with:
+        name: release_url
+    - name: Get Release File Name & Upload URL
+      id: get_release_info
+      run: |
+        value=`cat release_url/release_url`
+        echo ::set-output name=upload_url::$value
+    - name: Upload Linux ARMhf Release Assets
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+        asset_path: snore-linux-armhf
+        asset_name: snore-linux-armhf
+        asset_content_type: application/octet-stream
+  build-linux-aarch64:
+    name: Release AARCH64 Linux
+    runs-on: ubuntu-latest
+    container: clux/muslrust:stable
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build Linux AARCH64
+      run: |
+        export HOME=/root
+        apt-get update && apt-get install -y gcc-aarch64-linux-gnu
+        rustup target add aarch64-unknown-linux-musl
+        mkdir -p ~/.cargo
+        cat >> ~/.cargo/config <<EOF
+        [target.aarch64-unknown-linux-musl]
+        linker = "aarch64-linux-gnu-gcc"
+        rustflags = [ "-C", "target-feature=+crt-static", "-C", "link-arg=-lgcc" ]
+        EOF
+
+        cargo build --target aarch64-unknown-linux-musl --release
+        mv target/aarch64-unknown-linux-musl/release/snore $GITHUB_WORKSPACE/snore-linux-aarch64
+    - name: Load Release URL File from release job
+      uses: actions/download-artifact@v1
+      with:
+        name: release_url
+    - name: Get Release File Name & Upload URL
+      id: get_release_info
+      run: |
+        value=`cat release_url/release_url`
+        echo ::set-output name=upload_url::$value
+    - name: Upload Release Assets
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+        asset_path: snore-linux-aarch64
+        asset_name: snore-linux-aarch64
+        asset_content_type: application/octet-stream
+  build-macos:
+    name: Release MacOS
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build MacOS
+      run: |
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- \
+          --default-toolchain stable --profile minimal -y
+        cargo build --release
+        mv target/release/snore $GITHUB_WORKSPACE/snore-macos
+    - name: Load Release URL File from release job
+      uses: actions/download-artifact@v1
+      with:
+        name: release_url
+    - name: Get Release File Name & Upload URL
+      id: get_release_info
+      run: |
+        value=`cat release_url/release_url`
+        echo ::set-output name=upload_url::$value
+    - name: Upload MacOS Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+        asset_path: snore-macos
+        asset_name: snore-macos
+        asset_content_type: application/octet-stream
+  build-windows:
+    name: Release Windows
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build Windows
+      shell: bash
+      run: |
+        curl --proto '=https' --tlsv1.2 -sSf https://win.rustup.rs/x86_64 -o rustup-init.exe
+        ./rustup-init.exe --default-toolchain stable --profile minimal -y
+        cargo build --release
+        mv target/release/snore.exe $GITHUB_WORKSPACE/snore-windows.exe
+    - name: Load Release URL File from release job
+      uses: actions/download-artifact@v1
+      with:
+        name: release_url
+    - name: Get Release File Name & Upload URL
+      id: get_release_info
+      shell: bash
+      run: |
+        value=`cat release_url/release_url`
+        echo ::set-output name=upload_url::$value
+    - name: Upload Windows Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+        asset_path: snore-windows.exe
+        asset_name: snore-windows.exe
         asset_content_type: application/octet-stream

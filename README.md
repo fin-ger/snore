@@ -27,11 +27,24 @@ This program is meant to explore cross-platform distribution over many operating
 
 ### Statically Linked Binary for Linux
 
-<a href="https://github.com/fin-ger/snore/releases/latest/download/snore">
-  <img src="https://img.shields.io/badge/download-linux-blue?style=for-the-badge&logo=linux" alt="Download">
+<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-linux-amd64">
+  <img src="https://img.shields.io/badge/download-linux%20amd64-blue?style=for-the-badge&logo=linux" alt="Download">
+</a>
+<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-linux-aarch64">
+  <img src="https://img.shields.io/badge/download-linux%20aarch64-blue?style=for-the-badge&logo=linux" alt="Download">
+</a>
+<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-linux-arm">
+  <img src="https://img.shields.io/badge/download-linux%20arm-blue?style=for-the-badge&logo=linux" alt="Download">
+</a>
+<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-linux-armhf">
+  <img src="https://img.shields.io/badge/download-linux%20armhf-blue?style=for-the-badge&logo=linux" alt="Download">
 </a>
 
----
+Download the `snore` binary suitable for your CPU architecture. If unsure, use **amd64**. After downloading, rename the executable to `snore`:
+
+```shell
+$ mv snore-linux-amd64 snore
+```
 
 Before you can run the executable, you have to set the executable flag:
 
@@ -45,7 +58,47 @@ You can now run the program with:
 $ /path/to/snore
 ```
 
-> Move the executable into your `PATH` to use it like any other program installed on the system
+> Move the executable into your [`PATH`](https://askubuntu.com/questions/109381/how-to-add-path-of-a-program-to-path-environment-variable) to use it like any other program installed on the system
+
+### MacOS Binary
+
+<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-macos">
+  <img src="https://img.shields.io/badge/download-macos-blue?style=for-the-badge&logo=apple" alt="Download">
+</a>
+
+Download the `snore` binary and rename it to `snore`:
+
+```shell
+$ mv snore-macos snore
+```
+
+Before you can run the executable, you have to set the executable flag:
+
+```shell
+$ chmod +x /path/to/snore
+```
+
+You can now run the program with:
+
+```shell
+$ /path/to/snore
+```
+
+> Move the executable into your [`PATH`](https://askubuntu.com/questions/109381/how-to-add-path-of-a-program-to-path-environment-variable) to use it like any other program installed on the system
+
+### Windows Executable
+
+<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-windows">
+  <img src="https://img.shields.io/badge/download-windows-blue?style=for-the-badge&logo=windows" alt="Download">
+</a>
+
+Download `snore-windows.exe` and rename it to `snore.exe`. You can now run the program in the Windows command-line:
+
+```cmd
+C:\> \path\to\snore.exe
+```
+
+> Move the executable into your [`PATH`](https://stackoverflow.com/a/41895179/7216382) to use it like any other program installed on the system
 
 ## Usage
 
@@ -104,8 +157,8 @@ If you find any bugs/unexpected behaviour or you have a proposition for future c
 ## Deployment TODO
 
 - [x] elf statically linked binary
-- [ ] mac executable
-- [ ] windows exe
+- [x] mac executable
+- [x] windows exe
 - [ ] ebuild
 - [ ] rpm
 - [ ] deb
