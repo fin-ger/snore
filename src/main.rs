@@ -44,6 +44,9 @@ fn parse_duration<'a>(arguments: Option<Values<'a>>) -> Duration {
 }
 
 fn main() {
+    #[cfg(target_os = "windows")]
+    ansi_term::enable_ansi_support().unwrap();
+
     let matches = App::new("snore")
         .version(env!("CARGO_PKG_VERSION"))
         .author(env!("CARGO_PKG_AUTHORS"))
