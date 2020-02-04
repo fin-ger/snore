@@ -31,7 +31,7 @@ This program is meant to explore cross-platform distribution over many operating
 
 **If unsure use this package!**
 
-<a href="https://github.com/fin-ger/snore/releases/latest/download/snore_0.1.0_amd64.deb">
+<a href="https://github.com/fin-ger/snore/releases/latest/download/snore_0.1.1_amd64.deb">
   <img src="https://img.shields.io/badge/download-debian%20deb-%23e61e52?style=for-the-badge&logo=debian" alt="Download Debian Deb">
 </a>
 
@@ -40,14 +40,14 @@ This program is meant to explore cross-platform distribution over many operating
 Download the `deb` package and install it with:
 
 ```shell
-$ sudo apt-get install ./snore_0.1.0_amd64.deb
+$ sudo apt-get install ./snore_0.1.1_amd64.deb
 ```
 
 ### Install on Fedora
 
 *Including Red Hat, CentOS, OpenSUSE, etc.*
 
-<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-0.1.0-0.x86_64.rpm">
+<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-0.1.1-0.x86_64.rpm">
   <img src="https://img.shields.io/badge/download-fedora%20rpm-%23294172?style=for-the-badge&logo=fedora" alt="Download Fedora RPM">
 </a>
 
@@ -56,14 +56,14 @@ $ sudo apt-get install ./snore_0.1.0_amd64.deb
 Download the `rpm` package and install it with:
 
 ```shell
-$ sudo rpm -i ./snore-0.1.0-0.x86_64.rpm
+$ sudo rpm -i ./snore-0.1.1-0.x86_64.rpm
 ```
 
 ### Install on Gentoo GNU/Linux
 
 *Including Sabayon*
 
-<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-0.1.0.ebuild">
+<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-0.1.1.ebuild">
   <img src="https://img.shields.io/badge/download-gentoo%20ebuild-%2354487A?style=for-the-badge&logo=gentoo" alt="Download Gentoo Ebuild">
 </a>
 
@@ -72,8 +72,8 @@ $ sudo rpm -i ./snore-0.1.0-0.x86_64.rpm
 Download the ebuild and place it under `sys-apps/snore` under your local overlay and digest the ebuild:
 
 ```shell
-# mv snore-0.1.0.ebuild /path/to/your/local-overlay/sys-apps/snore/
-# ebuild snore-0.1.0.ebuild digest
+# mv snore-0.1.1.ebuild /path/to/your/local-overlay/sys-apps/snore/
+# ebuild snore-0.1.1.ebuild digest
 ```
 
 After that you can install snore with `emerge`:
