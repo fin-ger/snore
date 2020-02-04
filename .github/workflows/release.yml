@@ -102,13 +102,14 @@ jobs:
     - name: Build RPM
       id: rpm
       run: |
-        VERSION="${GITHUB_REF:11}"
+        export VERSION="${GITHUB_REF:11}"
         echo "::set-output name=version::$VERSION"
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- \
           --default-toolchain stable --profile minimal -y
         source $HOME/.cargo/env
         dnf install gcc rpmdevtools -y
         cargo install cargo-rpm
+        cargo build --release
         cargo rpm build -v
         cp target/release/rpmbuild/RPMS/x86_64/snore-*.x86_64.rpm $GITHUB_WORKSPACE/snore-${VERSION}-0.x86_64.rpm
     - name: Load Release URL File from release job
@@ -139,8 +140,9 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build DEB
       id: deb
+      shell: bash
       run: |
-        VERSION="${GITHUB_REF:11}"
+        export VERSION="${GITHUB_REF:11}"
         echo "::set-output name=version::$VERSION"
         apt-get update && apt-get install -y curl gcc
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- \
