@@ -147,7 +147,7 @@ $ /path/to/snore
 
 ### Windows Executable
 
-<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-windows">
+<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-windows.exe">
   <img src="https://img.shields.io/badge/download-windows-blue?style=for-the-badge&logo=windows" alt="Download Windows Executable">
 </a>
 
