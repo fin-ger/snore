@@ -1,6 +1,8 @@
 %define __spec_install_post %{nil}
 %define __os_install_post %{_dbpath}/brp-compress
 %define debug_package %{nil}
+%define _source_payload w7.xzdio
+%define _binary_payload w7.xzdio
 
 Name: snore
 Summary: Runs for the given time and is similar to the Unix 'sleep' command

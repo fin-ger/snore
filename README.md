@@ -25,7 +25,43 @@ This program is meant to explore cross-platform distribution over many operating
 
 ## Installation
 
+### Install on Debian
+
+*Including Ubuntu, Linux Mint, ElementaryOS, SteamOS, ZorinOS, etc.*
+
+**If unsure use this package!**
+
+<a href="https://github.com/fin-ger/snore/releases/latest/download/snore_0.1.0_amd64.deb">
+  <img src="https://img.shields.io/badge/download-debian%20deb-%23e61e52?style=for-the-badge&logo=debian" alt="Download Debian Deb">
+</a>
+
+> The Debian package is not included in the Debian package repository, yet. For now you have to download and install it manually.
+
+Download the `deb` package and install it with:
+
+```shell
+$ sudo apt-get install ./snore_0.1.0_amd64.deb
+```
+
+### Install on Fedora
+
+*Including Red Hat, CentOS, OpenSUSE, etc.*
+
+<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-0.1.0-0.x86_64.rpm">
+  <img src="https://img.shields.io/badge/download-fedora%20rpm-%23294172?style=for-the-badge&logo=fedora" alt="Download Fedora RPM">
+</a>
+
+> The Fedora package is not included in the Fedora package repository, yet. For now you have to download and install it manually.
+
+Download the `rpm` package and install it with:
+
+```shell
+$ sudo rpm -i ./snore-0.1.0-0.x86_64.rpm
+```
+
 ### Install on Gentoo GNU/Linux
+
+*Including Sabayon*
 
 <a href="https://github.com/fin-ger/snore/releases/latest/download/snore-0.1.0.ebuild">
   <img src="https://img.shields.io/badge/download-gentoo%20ebuild-%2354487A?style=for-the-badge&logo=gentoo" alt="Download Gentoo Ebuild">
@@ -47,6 +83,8 @@ After that you can install snore with `emerge`:
 ```
 
 ### Install on Arch Linux
+
+*Including Manjaro, Parabola, Chakra, etc.*
 
 <a href="https://github.com/fin-ger/snore/releases/latest/download/PKGBUILD">
   <img src="https://img.shields.io/badge/download-arch%20linux-%231793d1?style=for-the-badge&logo=arch-linux" alt="Download PKGBUILD">
@@ -84,7 +122,7 @@ $ snore
 ### MacOS Binary
 
 <a href="https://github.com/fin-ger/snore/releases/latest/download/snore-macos">
-  <img src="https://img.shields.io/badge/download-macos-blue?style=for-the-badge&logo=apple" alt="Download MacOS Binary">
+  <img src="https://img.shields.io/badge/download-macos-lightgrey?style=for-the-badge&logo=apple" alt="Download MacOS Binary">
 </a>
 
 Download the `snore-macos` binary and rename it to `snore`:
@@ -124,16 +162,16 @@ C:\> \path\to\snore.exe
 ### Statically Linked Binary for Linux
 
 <a href="https://github.com/fin-ger/snore/releases/latest/download/snore-linux-amd64">
-  <img src="https://img.shields.io/badge/download-linux%20amd64-blue?style=for-the-badge&logo=linux" alt="Download Linux AMD64">
+  <img src="https://img.shields.io/badge/download-linux%20amd64-yellow?style=for-the-badge&logo=linux" alt="Download Linux AMD64">
 </a>
 <a href="https://github.com/fin-ger/snore/releases/latest/download/snore-linux-aarch64">
-  <img src="https://img.shields.io/badge/download-linux%20aarch64-blue?style=for-the-badge&logo=linux" alt="Download Linux AARCH64">
+  <img src="https://img.shields.io/badge/download-linux%20aarch64-yellow?style=for-the-badge&logo=linux" alt="Download Linux AARCH64">
 </a>
 <a href="https://github.com/fin-ger/snore/releases/latest/download/snore-linux-arm">
-  <img src="https://img.shields.io/badge/download-linux%20arm-blue?style=for-the-badge&logo=linux" alt="Download Linux ARM">
+  <img src="https://img.shields.io/badge/download-linux%20arm-yellow?style=for-the-badge&logo=linux" alt="Download Linux ARM">
 </a>
 <a href="https://github.com/fin-ger/snore/releases/latest/download/snore-linux-armhf">
-  <img src="https://img.shields.io/badge/download-linux%20armhf-blue?style=for-the-badge&logo=linux" alt="Download Linux ARMhf">
+  <img src="https://img.shields.io/badge/download-linux%20armhf-yellow?style=for-the-badge&logo=linux" alt="Download Linux ARMhf">
 </a>
 
 Download the `snore-linux` binary suitable for your CPU architecture. If unsure, use **amd64**. After downloading, rename the executable to `snore`:
@@ -216,8 +254,8 @@ If you find any bugs/unexpected behaviour or you have a proposition for future c
 - [x] mac executable
 - [x] windows exe
 - [x] ebuild
-- [ ] rpm
-- [ ] deb
+- [x] rpm
+- [x] deb
 - [x] pkgbuild
 - [ ] apkbuild
 - [ ] windows msi
