@@ -37,7 +37,7 @@ jobs:
     - name: Release Ebuild
       id: ebuild
       run: |
-        VERSION="${GITHUB_REF:10}"
+        VERSION="${GITHUB_REF:11}"
         echo "::set-output name=version::$VERSION"
         cp dist/gentoo/snore.ebuild $GITHUB_WORKSPACE/snore-$VERSION.ebuild
     - name: Load Release URL File from release job
