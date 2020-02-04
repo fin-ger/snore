@@ -59,6 +59,39 @@ jobs:
         asset_path: snore-${{ steps.ebuild.outputs.version }}.ebuild
         asset_name: snore-${{ steps.ebuild.outputs.version }}.ebuild
         asset_content_type: text/plain
+  pkg-arch:
+    name: Create PKGBUILD
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Release PKGBUILD
+      run: |
+        VERSION="${GITHUB_REF:11}"
+        sed -i 's/pkgver=.*$/version='$VERSION'/g' dist/archlinux/PKGBUILD
+        wget "https://github.com/fin-ger/snore/archive/v${VERSION}.tar.gz"
+        shasum=$(sha256sum v$VERSION.tar.gz | grep -o '^[0-9A-Za-z]*\b')
+        sed -i "s/sha256sums=.*/sha256sums=('${shasum}')/g" dist/archlinux/PKGBUILD
+        cp dist/archlinux/PKGBUILD $GITHUB_WORKSPACE/PKGBUILD
+    - name: Load Release URL File from release job
+      uses: actions/download-artifact@v1
+      with:
+        name: release_url
+    - name: Get Release File Name & Upload URL
+      id: get_release_info
+      run: |
+        value=`cat release_url/release_url`
+        echo ::set-output name=upload_url::$value
+    - name: Upload Linux any Realease Assets
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+        asset_path: PKGBUILD
+        asset_name: PKGBUILD
+        asset_content_type: text/plain
   build-linux-amd64:
     name: Release Linux AMD64
     needs: release

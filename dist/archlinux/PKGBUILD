@@ -1,0 +1,21 @@
+pkgname=snore
+version=0.1.5
+pkgrel=1
+pkgdesc="Runs for the given time and is similar to the Unix 'sleep' command"
+url="https://github.com/fin-ger/snore"
+makedepends=('cargo')
+arch=('any')
+license=('GPL3')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/fin-ger/$pkgname/archive/v$pkgver.tar.gz")
+sha256sums=('8b55a0cadb3b51b1d2d9bb0897d5dce8bce5c24d2167b100447dd807310ca127')
+
+build() {
+	cd "$pkgname-$pkgver"
+	cargo build --release --target-dir "./target"
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	install -Dm755 "target/release/$pkgname" "$pkgdir/usr/bin/$pkgname"
+	install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
+}
