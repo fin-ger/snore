@@ -67,10 +67,10 @@ jobs:
     - uses: actions/checkout@v1
     - name: Release PKGBUILD
       run: |
-        VERSION="${GITHUB_REF:11}"
-        sed -i 's/pkgver=.*$/version='$VERSION'/g' dist/archlinux/PKGBUILD
-        wget "https://github.com/fin-ger/snore/archive/v${VERSION}.tar.gz"
-        shasum=$(sha256sum v$VERSION.tar.gz | grep -o '^[0-9A-Za-z]*\b')
+        VERSION="${GITHUB_REF:10}"
+        sed -i 's/pkgver=.*$/version='${VERSION:1}'/g' dist/archlinux/PKGBUILD
+        wget "https://github.com/fin-ger/snore/archive/${VERSION}.tar.gz"
+        shasum=$(sha256sum $VERSION.tar.gz | grep -o '^[0-9A-Za-z]*\b')
         sed -i "s/sha256sums=.*/sha256sums=('${shasum}')/g" dist/archlinux/PKGBUILD
         cp dist/archlinux/PKGBUILD $GITHUB_WORKSPACE/PKGBUILD
     - name: Load Release URL File from release job
