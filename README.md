@@ -46,6 +46,23 @@ After that you can install snore with `emerge`:
 # emerge snore
 ```
 
+### Install on Arch Linux
+
+<a href="https://github.com/fin-ger/snore/releases/latest/download/PKGBUILD">
+  <img src="https://img.shields.io/badge/download-arch%20linux-%231793d1?style=for-the-badge&logo=arch-linux" alt="Download PKGBUILD">
+</a>
+
+> snore is not provided in the AUR for the moment, you're required to build it manually via the provided PKGBUILD
+
+To install `snore` download the `PKGBUILD` and use `makepkg` to build & install it with pacman.
+
+```shell
+$ mkdir snore-pkg
+$ mv PKGBUILD snore-pkg/PKGBUILD
+$ cd snore-pkg 
+$ makepkg --install
+```
+
 ### Install with Cargo
 
 <a href="https://crates.io/crates/snore">
