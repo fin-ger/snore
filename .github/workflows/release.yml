@@ -92,6 +92,82 @@ jobs:
         asset_path: PKGBUILD
         asset_name: PKGBUILD
         asset_content_type: text/plain
+  pkg-rpm:
+    name: Create RPM
+    needs: release
+    runs-on: ubuntu-latest
+    container: fedora:latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build RPM
+      id: rpm
+      run: |
+        VERSION="${GITHUB_REF:11}"
+        echo "::set-output name=version::$VERSION"
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- \
+          --default-toolchain stable --profile minimal -y
+        source $HOME/.cargo/env
+        dnf install gcc rpmdevtools -y
+        cargo install cargo-rpm
+        cargo rpm build -v
+        cp target/release/rpmbuild/RPMS/x86_64/snore-*.x86_64.rpm $GITHUB_WORKSPACE/snore-${VERSION}-0.x86_64.rpm
+    - name: Load Release URL File from release job
+      uses: actions/download-artifact@v1
+      with:
+        name: release_url
+    - name: Get Release File Name & Upload URL
+      id: get_release_info
+      run: |
+        value=`cat release_url/release_url`
+        echo ::set-output name=upload_url::$value
+    - name: Upload Linux any Realease Assets
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+        asset_path: snore-${{ steps.rpm.outputs.version }}-0.x86_64.rpm
+        asset_name: snore-${{ steps.rpm.outputs.version }}-0.x86_64.rpm
+        asset_content_type: application/octet-stream
+  pkg-deb:
+    name: Create DEB
+    needs: release
+    runs-on: ubuntu-latest
+    container: debian:latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build DEB
+      id: deb
+      run: |
+        VERSION="${GITHUB_REF:11}"
+        echo "::set-output name=version::$VERSION"
+        apt-get update && apt-get install -y curl gcc
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- \
+          --default-toolchain stable --profile minimal -y
+        source $HOME/.cargo/env
+        cargo install cargo-deb
+        cargo deb -v
+        cp target/debian/snore_*_amd64.deb $GITHUB_WORKSPACE/snore_${VERSION}_amd64.deb
+    - name: Load Release URL File from release job
+      uses: actions/download-artifact@v1
+      with:
+        name: release_url
+    - name: Get Release File Name & Upload URL
+      id: get_release_info
+      run: |
+        value=`cat release_url/release_url`
+        echo ::set-output name=upload_url::$value
+    - name: Upload Linux any Realease Assets
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+        asset_path: snore_${{ steps.deb.outputs.version }}_amd64.deb
+        asset_name: snore_${{ steps.deb.outputs.version }}_amd64.deb
+        asset_content_type: application/octet-stream
   build-linux-amd64:
     name: Release Linux AMD64
     needs: release
