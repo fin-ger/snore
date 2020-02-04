@@ -218,7 +218,7 @@ If you find any bugs/unexpected behaviour or you have a proposition for future c
 - [x] ebuild
 - [ ] rpm
 - [ ] deb
-- [ ] pkgbuild
+- [x] pkgbuild
 - [ ] apkbuild
 - [ ] windows msi
 - [ ] solaris
