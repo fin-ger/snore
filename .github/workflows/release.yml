@@ -30,6 +30,7 @@ jobs:
         path: release_url
   pkg-gentoo:
     name: Create Gentoo Ebuild
+    needs: release
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -60,6 +61,7 @@ jobs:
         asset_content_type: text/plain
   build-linux-amd64:
     name: Release Linux AMD64
+    needs: release
     runs-on: ubuntu-latest
     container: clux/muslrust:stable
     steps:
@@ -90,6 +92,7 @@ jobs:
         asset_content_type: application/octet-stream
   build-linux-arm:
     name: Release Linux ARM
+    needs: release
     runs-on: ubuntu-latest
     container: clux/muslrust:stable
     steps:
@@ -129,6 +132,7 @@ jobs:
         asset_content_type: application/octet-stream
   build-linux-armhf:
     name: Release Linux ARMhf
+    needs: release
     runs-on: ubuntu-latest
     container: clux/muslrust:stable
     steps:
@@ -168,6 +172,7 @@ jobs:
         asset_content_type: application/octet-stream
   build-linux-aarch64:
     name: Release AARCH64 Linux
+    needs: release
     runs-on: ubuntu-latest
     container: clux/muslrust:stable
     steps:
@@ -208,6 +213,7 @@ jobs:
         asset_content_type: application/octet-stream
   build-macos:
     name: Release MacOS
+    needs: release
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v1
@@ -238,6 +244,7 @@ jobs:
         asset_content_type: application/octet-stream
   build-windows:
     name: Release Windows
+    needs: release
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
