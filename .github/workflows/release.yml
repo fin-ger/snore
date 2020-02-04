@@ -135,7 +135,7 @@ jobs:
     name: Create DEB
     needs: release
     runs-on: ubuntu-latest
-    container: debian:latest
+    container: debian:stable
     steps:
     - uses: actions/checkout@v1
     - name: Build DEB
