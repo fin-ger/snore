@@ -36,7 +36,7 @@ jobs:
     - name: Release Ebuild
       id: ebuild
       run: |
-        VERSION="${github_ref:1}"
+        VERSION="${GITHUB_REF:10}"
         echo "::set-output name=version::$VERSION"
         cp dist/gentoo/snore.ebuild $GITHUB_WORKSPACE/snore-$VERSION.ebuild
     - name: Load Release URL File from release job
@@ -106,7 +106,7 @@ jobs:
         EOF
 
         cargo build --target arm-unknown-linux-musleabi --release
-        strip target/arm-unknown-linux-musleabi/release/snore
+        arm-linux-gnueabi-strip target/arm-unknown-linux-musleabi/release/snore
         mv target/arm-unknown-linux-musleabi/release/snore $GITHUB_WORKSPACE/snore-linux-arm
     - name: Load Release URL File from release job
       uses: actions/download-artifact@v1
@@ -145,7 +145,7 @@ jobs:
         EOF
 
         cargo build --target arm-unknown-linux-musleabihf --release
-        strip target/arm-unknown-linux-musleabihf/release/snore
+        arm-linux-gnueabihf-strip target/arm-unknown-linux-musleabihf/release/snore
         mv target/arm-unknown-linux-musleabihf/release/snore $GITHUB_WORKSPACE/snore-linux-armhf
     - name: Load Release URL File from release job
       uses: actions/download-artifact@v1
@@ -185,7 +185,7 @@ jobs:
         EOF
 
         cargo build --target aarch64-unknown-linux-musl --release
-        strip target/aarch64-unknown-linux-musl/release/snore
+        aarch64-linux-gnu-strip target/aarch64-unknown-linux-musl/release/snore
         mv target/aarch64-unknown-linux-musl/release/snore $GITHUB_WORKSPACE/snore-linux-aarch64
     - name: Load Release URL File from release job
       uses: actions/download-artifact@v1
