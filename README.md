@@ -101,6 +101,30 @@ $ cd snore-pkg
 $ makepkg -si
 ```
 
+### Install on Alpine
+
+<a href="https://github.com/fin-ger/snore/releases/latest/download/PKGBUILD">
+  <img src="https://img.shields.io/badge/download-arch%20linux-%231793d1?style=for-the-badge&logo=arch-linux" alt="Download PKGBUILD">
+</a>
+
+> The apk to install the package is currently not provided in alpine pkgs, you have to build it yourself
+
+To install `snore` download the `APKBUILD` and use `abuild` to build the apk file.
+
+```shell
+$ mkdir snore-apk
+$ mv APKBUILD snore-apk/APKBUILD
+$ cd snore-apk
+$ abuild -r
+```
+
+After that you should have the build apk in your local packages under `$HOME/packages/$USER/`
+
+```
+$ apk add --allow-untrusted $HOME/packages/$USER/your_arch/snore-current_version.apk
+```
+
+
 ### Install with Cargo
 
 <a href="https://crates.io/crates/snore">
