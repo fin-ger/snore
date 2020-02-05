@@ -103,8 +103,8 @@ $ makepkg -si
 
 ### Install on Alpine
 
-<a href="https://github.com/fin-ger/snore/releases/latest/download/PKGBUILD">
-  <img src="https://img.shields.io/badge/download-arch%20linux-%231793d1?style=for-the-badge&logo=arch-linux" alt="Download PKGBUILD">
+<a href="https://github.com/fin-ger/snore/releases/latest/download/APKBUILD">
+  <img src="https://img.shields.io/badge/download-alpine-%231793d1?style=for-the-badge" alt="Download PKGBUILD">
 </a>
 
 > The apk to install the package is currently not provided in alpine pkgs, you have to build it yourself
