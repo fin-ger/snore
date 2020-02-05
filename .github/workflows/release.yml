@@ -101,7 +101,7 @@ jobs:
     - name: Release APKBUILD
       run: |
         VERSION="${GITHUB_REF:10}"
-        sed -i 's/pkgver=.*$/pkgver="${VERSION:1}"/g' dist/alpine/APKBUILD
+        sed -i 's/pkgver=.*$/pkgver="'${VERSION:1}'"/g' dist/alpine/APKBUILD
         wget "https://github.com/fin-ger/snore/archive/${VERSION}.tar.gz"
         shasum=$(sha512sum $VERSION.tar.gz)
         sed -i 's/sha512sums=.*/sha512sums="${shasum}")/g' dist/alpine/APKBUILD
