@@ -98,7 +98,7 @@ To install `snore` download the `PKGBUILD` and use `makepkg` to build & install 
 $ mkdir snore-pkg
 $ mv PKGBUILD snore-pkg/PKGBUILD
 $ cd snore-pkg 
-$ makepkg --install
+$ makepkg -si
 ```
 
 ### Install with Cargo
