@@ -102,7 +102,8 @@ jobs:
     - name: Release APKBUILD
       id: apk
       run: |
-        export VERSION="${GITHUB_REF:10}"
+        #export VERSION="${GITHUB_REF:10}"
+        export VERSION=v0.1.1
         echo "::set-output name=version::${VERSION:1}"
         apk add alpine-sdk
         adduser -D -G abuild build
