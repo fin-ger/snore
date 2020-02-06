@@ -106,7 +106,6 @@ jobs:
         echo "::set-output name=version::${VERSION:1}"
         apk add alpine-sdk
         adduser -D -G abuild build
-        su build
 
         sed -i 's/pkgver=.*$/pkgver="'${VERSION:1}'"/g' dist/alpine/APKBUILD
         wget "https://github.com/fin-ger/snore/archive/${VERSION}.tar.gz"
@@ -115,8 +114,7 @@ jobs:
         sed -i "s/sha512sums=.*$/sha512sums=\"${shasum}\"/g" dist/alpine/APKBUILD
 
         cd dist/alpine
-        abuild-keygen -a -n
-        abuild -r
+        su build -c "abuild-keygen -a -n && abuild -r"
 
         cp /home/build/packages/dist/x86_64/snore-${VERSION:1}-r0.apk $GITHUB_WORKSPACE/snore-${VERSION:1}-r0.apk
     - name: Load Release URL File from release job
