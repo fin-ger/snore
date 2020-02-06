@@ -271,7 +271,7 @@ If you find any bugs/unexpected behaviour or you have a proposition for future c
 - [x] rpm
 - [x] deb
 - [x] pkgbuild
-- [ ] apkbuild
+- [x] apkbuild
 - [ ] windows msi
 - [ ] solaris
 - [ ] homebrew
