@@ -114,6 +114,9 @@ jobs:
         shasum=$(sha512sum snore-${VERSION:1}.tar.gz)
         sed -i "s/sha512sums=.*$/sha512sums=\"${shasum}\"/g" dist/alpine/APKBUILD
 
+        chmod 777 dist/alpine
+        chmod 666 dist/alpine/APKBUILD
+
         cd dist/alpine
         su build -c "abuild-keygen -a -n && abuild -r"
 
