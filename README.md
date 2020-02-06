@@ -25,7 +25,7 @@ This program is meant to explore cross-platform distribution over many operating
 
 ## Installation
 
-### Install on Debian
+### Install on Debian GNU/Linux
 
 *Including Ubuntu, Linux Mint, ElementaryOS, SteamOS, ZorinOS, etc.*
 
@@ -43,7 +43,7 @@ Download the `deb` package and install it with:
 $ sudo apt-get install ./snore_0.1.1_amd64.deb
 ```
 
-### Install on Fedora
+### Install on Fedora GNU/Linux
 
 *Including Red Hat, CentOS, OpenSUSE, etc.*
 
@@ -82,12 +82,12 @@ After that you can install snore with `emerge`:
 # emerge snore
 ```
 
-### Install on Arch Linux
+### Install on Arch GNU/Linux
 
 *Including Manjaro, Parabola, Chakra, etc.*
 
 <a href="https://github.com/fin-ger/snore/releases/latest/download/PKGBUILD">
-  <img src="https://img.shields.io/badge/download-arch%20linux-%231793d1?style=for-the-badge&logo=arch-linux" alt="Download PKGBUILD">
+  <img src="https://img.shields.io/badge/download-arch%20pkgbuild-%231793d1?style=for-the-badge&logo=arch-linux" alt="Download Arch PKGBUILD">
 </a>
 
 > snore is not provided in the AUR for the moment, you're required to build it manually via the provided PKGBUILD
@@ -101,34 +101,24 @@ $ cd snore-pkg
 $ makepkg -si
 ```
 
-### Install on Alpine
+### Install on Alpine Linux
 
-<a href="https://github.com/fin-ger/snore/releases/latest/download/APKBUILD">
-  <img src="https://img.shields.io/badge/download-alpine-%231793d1?style=for-the-badge" alt="Download PKGBUILD">
+<a href="https://github.com/fin-ger/snore/releases/latest/download/snore-0.1.1-r0.apk">
+  <img src="https://img.shields.io/badge/download-alpine%20apk-%231793d1?style=for-the-badge&logo=linux-foundation" alt="Download PKGBUILD">
 </a>
 
-> The apk to install the package is currently not provided in alpine pkgs, you have to build it yourself
+> snore is currently not included in the Alpine packages, yet. For now you have to download and install it manually.
 
-To install `snore` download the `APKBUILD` and use `abuild` to build the apk file.
-
-```shell
-$ mkdir snore-apk
-$ mv APKBUILD snore-apk/APKBUILD
-$ cd snore-apk
-$ abuild -r
-```
-
-After that you should have the build apk in your local packages under `$HOME/packages/$USER/`
+To install `snore` download the `snore-0.1.1-r0.apk` and install it like this:
 
 ```
-$ apk add --allow-untrusted $HOME/packages/$USER/your_arch/snore-current_version.apk
+$ sudo apk add --allow-untrusted ./snore-0.1.1-r0.apk
 ```
-
 
 ### Install with Cargo
 
 <a href="https://crates.io/crates/snore">
-  <img src="https://img.shields.io/crates/v/snore?style=for-the-badge" alt="Crates.io Link">
+  <img src="https://img.shields.io/crates/v/snore?style=for-the-badge&logo=rust" alt="Crates.io Link">
 </a>
 
 Install it with Cargo:

@@ -60,7 +60,7 @@ jobs:
         asset_name: snore-${{ steps.ebuild.outputs.version }}.ebuild
         asset_content_type: text/plain
   pkg-arch:
-    name: Create PKGBUILD
+    name: Create Arch PKGBUILD
     needs: release
     runs-on: ubuntu-latest
     steps:
@@ -93,19 +93,32 @@ jobs:
         asset_name: PKGBUILD
         asset_content_type: text/plain
   pkg-alpine:
-    name: Create APKBUILD
+    name: Create Alpine APK
     needs: release
     runs-on: ubuntu-latest
+    container: alpine:latest
     steps:
     - uses: actions/checkout@v1
     - name: Release APKBUILD
+      id: apk
       run: |
-        VERSION="${GITHUB_REF:10}"
+        export VERSION="${GITHUB_REF:10}"
+        echo "::set-output name=version::${VERSION:1}"
+        apk add alpine-sdk
+        adduser -D -G abuild build
+        su build
+
         sed -i 's/pkgver=.*$/pkgver="'${VERSION:1}'"/g' dist/alpine/APKBUILD
         wget "https://github.com/fin-ger/snore/archive/${VERSION}.tar.gz"
-        shasum=$(sha512sum $VERSION.tar.gz)
-        sed -i 's/sha512sums=.*/sha512sums="${shasum}")/g' dist/alpine/APKBUILD
-        cp dist/alpine/APKBUILD $GITHUB_WORKSPACE/APKBUILD
+        mv $VERSION.tar.gz snore-${VERSION:1}.tar.gz
+        shasum=$(sha512sum snore-${VERSION:1}.tar.gz)
+        sed -i "s/sha512sums=.*$/sha512sums=\"${shasum}\"/g" dist/alpine/APKBUILD
+
+        cd dist/alpine
+        abuild-keygen -a -n
+        abuild -r
+
+        cp /home/build/packages/dist/x86_64/snore-${VERSION:1}-r0.apk $GITHUB_WORKSPACE/snore-${VERSION:1}-r0.apk
     - name: Load Release URL File from release job
       uses: actions/download-artifact@v1
       with:
@@ -122,8 +135,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.get_release_info.outputs.upload_url }}
-        asset_path: APKBUILD
-        asset_name: APKBUILD
+        asset_path: snore-${{ steps.apk.outputs.version }}-r0.apk
+        asset_name: snore-${{ steps.apk.outputs.version }}-r0.apk
         asset_content_type: text/plain
   pkg-rpm:
     name: Create RPM

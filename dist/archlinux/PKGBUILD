@@ -1,5 +1,5 @@
 pkgname=snore
-pkgver=0.1.0
+pkgver=0.0.0
 pkgrel=1
 pkgdesc="Runs for the given time and is similar to the Unix 'sleep' command"
 url="https://github.com/fin-ger/snore"
